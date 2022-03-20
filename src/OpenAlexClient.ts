@@ -14,7 +14,7 @@ export class OpenAlexClient {
   }
 
   private async getLists(entity: string) {
-    const resp: rm.IRestResponse<BaseEntity[]> = await this.restClient.get(
+    const resp: rm.IRestResponse<AuthorData[]> = await this.restClient.get(
       entity
     );
     if (resp.statusCode === 200 && resp.result !== null) {
@@ -24,11 +24,58 @@ export class OpenAlexClient {
     }
   }
 
-  public async getAuthors(): Promise<BaseEntity[]> {
-    return this.getLists("/authors");
+  public async getAuthors(): Promise<AuthorData[]> {
+    const resp: rm.IRestResponse<AuthorData[]> = await this.restClient.get(
+      "/authors"
+    );
+    if (resp.statusCode === 200 && resp.result !== null) {
+      return resp.result;
+    } else {
+      throw Error("Resource not found.");
+    }
   }
 
-  public async getConcepts(): Promise<BaseEntity[]> {
-    return this.getLists("/concepts");
+  public async getConcepts(): Promise<ConceptData[]> {
+    const resp: rm.IRestResponse<ConceptData[]> = await this.restClient.get(
+      "/concepts"
+    );
+    if (resp.statusCode === 200 && resp.result !== null) {
+      return resp.result;
+    } else {
+      throw Error("Resource not found.");
+    }
+  }
+
+  public async getInstitutions(): Promise<InstitutionData[]> {
+    const resp: rm.IRestResponse<InstitutionData[]> = await this.restClient.get(
+      "/institutions"
+    );
+    if (resp.statusCode === 200 && resp.result !== null) {
+      return resp.result;
+    } else {
+      throw Error("Resource not found.");
+    }
+  }
+
+  public async getVenues(): Promise<VenueData[]> {
+    const resp: rm.IRestResponse<VenueData[]> = await this.restClient.get(
+      "/venues"
+    );
+    if (resp.statusCode === 200 && resp.result !== null) {
+      return resp.result;
+    } else {
+      throw Error("Resource not found.");
+    }
+  }
+
+  public async getWorks(): Promise<WorkData[]> {
+    const resp: rm.IRestResponse<WorkData[]> = await this.restClient.get(
+      "/works"
+    );
+    if (resp.statusCode === 200 && resp.result !== null) {
+      return resp.result;
+    } else {
+      throw Error("Resource not found.");
+    }
   }
 }
