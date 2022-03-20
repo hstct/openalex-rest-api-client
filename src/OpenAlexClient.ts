@@ -13,16 +13,22 @@ export class OpenAlexClient {
     return this.baseUrl;
   }
 
-  public async getAuthors(): Promise<Author[]> {
-    const resp: rm.IRestResponse<Author[]> = await this.restClient.get<
-      Author[]
-    >("/authors");
+  private async getLists(entity: string) {
+    const resp: rm.IRestResponse<BaseEntity[]> = await this.restClient.get(
+      entity
+    );
     if (resp.statusCode === 200 && resp.result !== null) {
       return resp.result;
     } else {
-      throw Error(
-        `Could not get the resource. Status Code: ${resp.statusCode}`
-      );
+      throw Error("Resource not found.");
     }
+  }
+
+  public async getAuthors(): Promise<BaseEntity[]> {
+    return this.getLists("/authors");
+  }
+
+  public async getConcepts(): Promise<BaseEntity[]> {
+    return this.getLists("/concepts");
   }
 }

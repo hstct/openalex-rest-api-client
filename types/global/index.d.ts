@@ -12,6 +12,23 @@ declare interface DehydratedConcept extends BaseDehydrated {
   level: number;
 }
 
+declare interface Concept extends DehydratedConcept {
+  description?: string;
+  works_count: number;
+  cited_by_count: number;
+  ids: ConceptIds;
+  image_url?: string;
+  image_thumbnail_url?: string;
+  // TODO
+  international?: any;
+  ancestors?: DehydratedConcept[];
+  related_concepts?: RelatedConcept[];
+  counts_by_year: CountsByYear[];
+  works_api_url: string;
+  updated_date: string;
+  created_date: string;
+}
+
 declare interface DehydratedInstitution extends BaseDehydrated {
   ror: string;
   country_code: string;
@@ -60,3 +77,13 @@ declare interface AuthorIds extends OpenAlexIds {
   wikipedia?: string;
   scopus?: string;
 }
+
+declare interface ConceptIds extends OpenAlexIds {
+  wikidata: string;
+  mag?: number;
+  wikipedia?: string;
+  umls_aui: string[];
+  umls_cui: string[];
+}
+
+declare type BaseEntity = Author | Concept;
