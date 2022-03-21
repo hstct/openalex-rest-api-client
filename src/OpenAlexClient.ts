@@ -13,16 +13,17 @@ export class OpenAlexClient {
     return this.baseUrl;
   }
 
-  private async getLists(entity: string) {
-    const resp: rm.IRestResponse<AuthorData[]> = await this.restClient.get(
-      entity
-    );
-    if (resp.statusCode === 200 && resp.result !== null) {
-      return resp.result;
-    } else {
-      throw Error("Resource not found.");
-    }
-  }
+  // TODO: Make generic method for getting Lists that TypeScript likes
+  // private async getLists(entity: string) {
+  //   const resp: rm.IRestResponse<AuthorData[]> = await this.restClient.get(
+  //     entity
+  //   );
+  //   if (resp.statusCode === 200 && resp.result !== null) {
+  //     return resp.result;
+  //   } else {
+  //     throw Error("Resource not found.");
+  //   }
+  // }
 
   public async getAuthors(): Promise<AuthorData[]> {
     const resp: rm.IRestResponse<AuthorData[]> = await this.restClient.get(
